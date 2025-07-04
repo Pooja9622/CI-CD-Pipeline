@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+    commands:
+      - echo "Nothing to install for HTML"
+  build:
+    commands:
+      - echo "Building static site..."
+  post_build:
+    commands:
+      - echo "Build complete. Syncing to S3..."
+      - aws s3 sync . s3://your-s3-bucket-name --delete
+
+artifacts:
+  files:
+    - '**/*'
